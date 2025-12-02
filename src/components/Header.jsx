@@ -3,22 +3,26 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
+// === MENU LENGKAP (5 PILAR) ===
 const navLinks = [
-  { href: '/', label: 'Beranda' },
-  { href: '/products', label: 'Produk' },
-  { href: '/about', label: 'Tentang Kami' },
+  // Menggantikan 'Beranda' menjadi 'Agro Tourism' (tetap mengarah ke /)
+  { href: '/', label: 'Agro Tourism' }, 
+  { href: '/education', label: 'Educational Activities' },
+  { href: '/products', label: 'Product' },
+  { href: '/waste', label: 'Waste Management' },
+  { href: '/community', label: 'Community Development' },
+  { href: '/about', label: 'About' },
 ];
+// ==============================
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const { scrollY } = useScroll();
 
-  // Deteksi halaman saat ini
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
-  // Sembunyikan header saat scroll ke bawah
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const previous = scrollY.getPrevious();
     if (latest > previous && latest > 150) {
@@ -28,7 +32,6 @@ export default function Header() {
     }
   });
 
-  // Ganti background header saat scroll
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     return scrollY.on('change', (latest) => {
@@ -36,8 +39,6 @@ export default function Header() {
     });
   }, [scrollY]);
 
-  // LOGIKA PENTING: Header solid JIKA:
-  // (Bukan di HomePage) ATAU (Kita di HomePage TAPI sudah di-scroll)
   const isSolid = !isHomePage || isScrolled;
 
   return (
@@ -55,15 +56,13 @@ export default function Header() {
       >
         <nav className="container mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
           
-          {/* === LOGO DAN TEKS DIGABUNGKAN DI SINI === */}
+          {/* Logo & Teks Brand */}
           <Link to="/" className="flex items-center gap-3" aria-label="Beranda Strawberry Corps">
-            {/* 1. Gambar Logo */}
             <img 
-              src="/image/logo.png" // Menggunakan logo.png sesuai kode Anda
+              src="/image/logo.png" 
               alt="Strawberry Corps Logo" 
-              className="h-10 w-auto" // Sesuaikan tinggi logo (h-10)
+              className="h-10 w-auto" 
             />
-            {/* 2. Teks Logo (dengan warna dinamis) */}
             <span 
               className="text-2xl font-bold font-serif transition-colors"
               style={{ color: isSolid ? '#b91c1c' : '#ffffff' }} 
@@ -71,22 +70,19 @@ export default function Header() {
               Strawberry Corps
             </span>
           </Link>
-          {/* ======================================== */}
-          
-          {/* Link teks duplikat sudah dihapus */}
 
-          {/* Nav Desktop */}
-          <div className="hidden items-center space-x-6 md:flex">
+          {/* Nav Desktop - Menggunakan text-sm agar menu panjang muat */}
+          <div className="hidden xl:flex items-center space-x-6">
             {navLinks.map((link) => (
               <NavLink
                 key={link.href}
                 to={link.href}
                 className={({ isActive }) =>
-                  `font-sans font-medium transition-colors ${
+                  `font-sans text-sm font-medium transition-colors ${ // Font diperkecil sedikit
                     isSolid ? 'text-stone-700' : 'text-white' 
                   } ${
                     isActive
-                      ? 'text-strawberry-dark'
+                      ? 'text-strawberry-dark font-bold'
                       : 'hover:text-strawberry'
                   }`
                 }
@@ -96,8 +92,8 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Tombol Nav Mobile */}
-          <div className="md:hidden">
+          {/* Tombol Nav Mobile (Muncul lebih awal di layar Laptop kecil ke bawah) */}
+          <div className="xl:hidden">
             <button
               onClick={() => setIsOpen(true)}
               className={isSolid ? 'text-stone-800' : 'text-white'}
@@ -109,7 +105,7 @@ export default function Header() {
         </nav>
       </motion.header>
 
-      {/* Drawer Menu Mobile (menggunakan framer-motion) */}
+      {/* Drawer Menu Mobile */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -122,7 +118,6 @@ export default function Header() {
             aria-modal="true"
           >
             <div className="flex items-center justify-between">
-              {/* Judul menu mobile diubah menjadi nama brand */}
               <span className="font-serif text-xl font-bold text-strawberry-dark">
                 Strawberry Corps
               </span>
@@ -130,14 +125,14 @@ export default function Header() {
                 <X size={28} className="text-stone-700" />
               </button>
             </div>
-            <nav className="mt-8 flex flex-col space-y-6">
+            <nav className="mt-8 flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.href}
                   to={link.href}
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
-                    `text-2xl font-medium ${
+                    `text-lg font-medium border-b border-gray-100 pb-2 ${ // Style list mobile
                       isActive ? 'text-strawberry-dark' : 'text-stone-700'
                     }`
                   }

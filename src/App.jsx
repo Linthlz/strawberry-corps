@@ -1,35 +1,54 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
-// import WhatsAppButton from './components/WhatsAppButton.jsx'; // <-- Hapus atau ganti nama ini
-import ScrollToTopButton from './components/ScrollToTopButton.jsx'; // <-- GANTI DENGAN INI
-import AudioPlayer from './components/AudioPlayer.jsx'; // <-- TAMBAHKAN INI
+import ScrollToTopButton from './components/ScrollToTopButton.jsx';
+import AudioPlayer from './components/AudioPlayer.jsx';
 
-// Impor semua halaman Anda
+// === Import Halaman ===
 import HomePage from './pages/HomePage.jsx';
 import ProductsPage from './pages/ProductsPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
+
+// Tambahan agar sesuai navLinks
+import EducationPage from './pages/EducationPage.jsx';
+import WastePage from './pages/WastePage.jsx';
+import CommunityPage from './pages/CommunityPage.jsx';
 
 function App() {
   const location = useLocation();
 
   return (
     <>
+      {/* Header selalu tampil */}
       <Header />
-      <AudioPlayer /> {/* <-- TAMBAHKAN INI */}
-      
+
+      {/* Audio Player global */}
+      <AudioPlayer />
+
       <main>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
+            
+            {/* Halaman sesuai navLinks dari Header */}
             <Route path="/" element={<HomePage />} />
+            <Route path="/education" element={<EducationPage />} />
             <Route path="/products" element={<ProductsPage />} />
+            <Route path="/waste" element={<WastePage />} />
+            <Route path="/community" element={<CommunityPage />} />
+
+            {/* Halaman tambahan */}
             <Route path="/about" element={<AboutPage />} />
+
           </Routes>
         </AnimatePresence>
       </main>
-      
-      <ScrollToTopButton /> {/* <-- GANTI INI */}
+
+      {/* Tombol Scroll to Top */}
+      <ScrollToTopButton />
+
+      {/* Footer global */}
       <Footer />
     </>
   );
