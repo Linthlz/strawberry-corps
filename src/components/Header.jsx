@@ -5,7 +5,6 @@ import { Menu, X } from 'lucide-react';
 
 // === MENU LENGKAP (5 PILAR) ===
 const navLinks = [
-  // Menggantikan 'Beranda' menjadi 'Agro Tourism' (tetap mengarah ke /)
   { href: '/', label: 'Agro Tourism' }, 
   { href: '/education', label: 'Educational Activities' },
   { href: '/products', label: 'Product' },
@@ -21,7 +20,10 @@ export default function Header() {
   const { scrollY } = useScroll();
 
   const location = useLocation();
+  
+  // 1. Deteksi halaman
   const isHomePage = location.pathname === '/';
+  const isWastePage = location.pathname === '/waste'; // Menambahkan deteksi halaman Waste
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const previous = scrollY.getPrevious();
@@ -39,7 +41,12 @@ export default function Header() {
     });
   }, [scrollY]);
 
-  const isSolid = !isHomePage || isScrolled;
+  // 2. Logika Warna Header (PENTING)
+  // Header dianggap "Solid" (Putih) jika:
+  // - Sudah di-scroll (isScrolled true)
+  // - ATAU: Sedang BUKAN di Homepage DAN BUKAN di Wastepage
+  // (Artinya: Di Home dan Wastepage, header akan Transparan saat di paling atas)
+  const isSolid = isScrolled || (!isHomePage && !isWastePage);
 
   return (
     <>
@@ -65,24 +72,27 @@ export default function Header() {
             />
             <span 
               className="text-2xl font-bold font-serif transition-colors"
+              // Text berubah jadi Merah saat solid, Putih saat transparan
               style={{ color: isSolid ? '#b91c1c' : '#ffffff' }} 
             >
               Strawberry Corps
             </span>
           </Link>
 
-          {/* Nav Desktop - Menggunakan text-sm agar menu panjang muat */}
+          {/* Nav Desktop */}
           <div className="hidden xl:flex items-center space-x-6">
             {navLinks.map((link) => (
               <NavLink
                 key={link.href}
                 to={link.href}
                 className={({ isActive }) =>
-                  `font-sans text-sm font-medium transition-colors ${ // Font diperkecil sedikit
+                  `font-sans text-sm font-medium transition-colors ${
+                    // Warna Link menyesuaikan background header
                     isSolid ? 'text-stone-700' : 'text-white' 
                   } ${
                     isActive
-                      ? 'text-strawberry-dark font-bold'
+                      // Jika aktif: Merah Gelap saat solid, atau tetap Putih/Merah terang saat transparan
+                      ? (isSolid ? 'text-strawberry-dark font-bold' : 'font-bold underline decoration-2 underline-offset-4')
                       : 'hover:text-strawberry'
                   }`
                 }
@@ -92,7 +102,7 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Tombol Nav Mobile (Muncul lebih awal di layar Laptop kecil ke bawah) */}
+          {/* Tombol Nav Mobile */}
           <div className="xl:hidden">
             <button
               onClick={() => setIsOpen(true)}
@@ -132,7 +142,7 @@ export default function Header() {
                   to={link.href}
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
-                    `text-lg font-medium border-b border-gray-100 pb-2 ${ // Style list mobile
+                    `text-lg font-medium border-b border-gray-100 pb-2 ${
                       isActive ? 'text-strawberry-dark' : 'text-stone-700'
                     }`
                   }
