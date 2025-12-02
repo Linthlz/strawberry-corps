@@ -1,176 +1,279 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { BookOpen, Users, Sprout, GraduationCap, ArrowRight } from 'lucide-react';
+import { Users, Sprout, GraduationCap, ArrowRight, CheckCircle, ArrowUpRight } from 'lucide-react';
 
 // === DATA PROGRAM EDUKASI ===
 const educationPrograms = [
   {
     id: 1,
-    title: 'School Field Trip',
-    description: 'Ajak siswa belajar di alam terbuka. Program pengenalan pertanian stroberi yang menyenangkan dan interaktif untuk siswa TK hingga SMA.',
-    image: '/image/hero.jpg', // Ganti dengan foto anak sekolah/field trip
-    icon: Users,
+    title: 'Pembinaan & Magang Kewirausahaan',
+    description: 'Melalui program magang wirausaha dan Wirausaha Merdeka, kami membimbing mahasiswa dalam inovasi, pengembangan produk, dan kompetisi bisnis.',
+    icon: Sprout,
   },
   {
     id: 2,
-    title: 'Workshop Pengolahan',
-    description: 'Pelajari rahasia dapur kami! Workshop hands-on cara mengolah stroberi segar menjadi selai premium, jus sehat, dan kue lezat.',
-    image: '/image/hero1.jpg', // Ganti dengan foto workshop/memasak
-    icon: BookOpen,
+    title: 'Edukasi Inklusif untuk Semua',
+    description: 'Kami aktif memberikan edukasi lintas kelompok, mulai dari siswa sekolah, mahasiswa internasional, hingga komunitas disabilitas.',
+    icon: Users,
   },
   {
     id: 3,
-    title: 'Magang & Penelitian',
-    description: 'Kami membuka kesempatan bagi mahasiswa pertanian dan agribisnis untuk melakukan penelitian atau praktik kerja lapangan (PKL) di kebun kami.',
-    image: '/image/hero4.jpg', // Ganti dengan foto mahasiswa/peneliti
+    title: 'Edukasi & Pelatihan Pemuda',
+    description: 'Kami telah mengedukasi lebih dari 500+ pemuda dari berbagai jenjang, mulai dari TK, SD, SMP, SMA, mahasiswa hingga masyarakat umum.',
     icon: GraduationCap,
   },
 ];
 
-// Varian Animasi (Konsisten dengan HomePage)
-const sectionVariants = {
-  hidden: { opacity: 0, y: 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] },
+// === DATA ARTIKEL (SECTION BARU) ===
+const articles = [
+  {
+    id: 1,
+    title: "Mentoring Kewirausahaan ke mahasiswa dari berbagai universitas",
+    desc: "Mentoring mahasiswa dengan membekali wawasan bisnis, pengembangan ide sejak dini.",
+    image: "/image/Edukasi_5.png", 
   },
+  {
+    id: 2,
+    title: "Edukasi oleh Edukator kepada siswa mancanegara",
+    desc: "Memanfaatkan limbah pertanian stroberi menjadi karya seni yang mengasah motorik halus dan kreativitas siswa.",
+    image: "/image/Edukasi_7.png",
+  }
+];
+
+// === DATA "WAYS WE HELP" ===
+const helpPoints = [
+  "Edukasi Rutin",
+  "Mentoring Kewirausahaan",
+  "Jadwal fleksibel.",
+];
+
+// === VARIAN ANIMASI ===
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
-const containerVariants = {
+const staggerContainer = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.15 } },
+  show: { transition: { staggerChildren: 0.2 } }
 };
 
 export default function EducationPage() {
   return (
-    <motion.div
-      initial="hidden"
-      animate="show"
-      variants={containerVariants}
-      className="bg-cream-50 min-h-screen"
-    >
+    <div className="bg-cream-50 min-h-screen overflow-hidden font-sans text-stone-800">
+      
       {/* ===================== HERO SECTION ===================== */}
-      <section 
-        className="relative h-[60vh] flex items-center justify-center text-center text-white overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: "url('/image/hero1.jpg')" }} // Background Hero
-      >
-        <div className="absolute inset-0 bg-black/60"></div>
-        <motion.div variants={sectionVariants} className="relative z-10 px-4 max-w-4xl">
-          <h1 className="font-serif text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
-            Educational Activities
-          </h1>
-          <p className="font-sans text-lg md:text-xl text-gray-100 max-w-2xl mx-auto">
-            Belajar langsung dari alam. Kami menyediakan ruang bagi generasi muda dan profesional untuk mendalami dunia pertanian stroberi modern.
-          </p>
+      <section className="relative pt-36 md:pt-44 pb-32 px-4 container mx-auto text-center">
+        {/* Dekorasi Squiggle */}
+        <div className="absolute top-20 right-10 md:right-32 hidden md:block">
+           <svg width="60" height="60" viewBox="0 0 100 100" fill="none" stroke="#EAB308" strokeWidth="5">
+              <path d="M10 50 Q 25 25 50 50 T 90 50" />
+           </svg>
+        </div>
+        <div className="absolute top-32 left-10 md:left-32 hidden md:block">
+           <svg width="40" height="40" viewBox="0 0 50 50" fill="none" stroke="#D32F2F" strokeWidth="4">
+              <circle cx="25" cy="25" r="10" />
+           </svg>
+        </div>
+
+        <motion.div 
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="max-w-4xl mx-auto z-10 relative"
+        >
+          <motion.h1 variants={fadeInUp} className="font-serif text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-stone-900">
+            Belajar, Bermain, & <br />
+            <span className="font-serif text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-stone-900">Tumbuh Bersama!</span>
+          </motion.h1>
+          
+          <motion.p variants={fadeInUp} className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+            Fokus pada keterampilan dasar pertanian, kecintaan pada alam, dan kolaborasi tim yang menyenangkan di kebun stroberi kami.
+          </motion.p>
+        </motion.div>
+
+        {/* IMAGE GRID (TILTED CARDS STYLE) */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-6xl mx-auto items-end"
+        >
+            <div className="transform -rotate-6 hover:rotate-0 transition-transform duration-500 bg-white p-2 shadow-xl rounded-2xl">
+                <img src="/image/Edukasi_1.JPG" alt="Kids Playing" className="rounded-xl w-full h-48 md:h-64 object-cover" />
+            </div>
+            <div className="transform rotate-3 hover:rotate-0 transition-transform duration-500 bg-white p-2 shadow-xl rounded-2xl mb-8">
+                <img src="/image/Edukasi_6.png" alt="Learning" className="rounded-xl w-full h-56 md:h-72 object-cover" />
+            </div>
+            <div className="transform -rotate-2 hover:rotate-0 transition-transform duration-500 bg-white p-2 shadow-xl rounded-2xl">
+                <img src="/image/Edukasi_11.jpg" alt="Strawberry" className="rounded-xl w-full h-48 md:h-64 object-cover" />
+            </div>
+            <div className="transform rotate-6 hover:rotate-0 transition-transform duration-500 bg-white p-2 shadow-xl rounded-2xl mb-6">
+                <img src="/image/Edukasi_8.JPG" alt="Art Activity" className="rounded-xl w-full h-52 md:h-60 object-cover" />
+            </div>
         </motion.div>
       </section>
 
-      {/* ===================== INTRO SECTION ===================== */}
-      <motion.section variants={sectionVariants} className="py-20 lg:py-24 bg-white">
-        <div className="container mx-auto max-w-5xl px-4 text-center">
-          <span className="font-sans text-sm font-bold uppercase tracking-widest text-strawberry-dark mb-2 block">
-            Filosofi Edukasi Kami
-          </span>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-8 text-stone-800">
-            Menumbuhkan Rasa Cinta pada Pertanian
-          </h2>
-          <p className="font-sans text-lg text-gray-600 leading-relaxed mb-8">
-            Di Strawberry Corps, pendidikan adalah salah satu pilar utama kami. Kami percaya bahwa pertanian bukan hanya soal menanam, tapi juga tentang memahami ekosistem, menghargai pangan, dan inovasi berkelanjutan. Program kami dirancang untuk memberikan pengalaman nyata yang tidak bisa didapatkan di dalam kelas.
-          </p>
-          <div className="flex justify-center gap-8 text-stone-700">
-            <div className="flex flex-col items-center">
-              <Sprout size={32} className="text-green-700 mb-2" />
-              <span className="font-serif font-bold">Alam</span>
+      {/* ===================== BANNER SECTION ===================== */}
+      <section className="bg-gradient-to-r from-green-800 to-green-900 py-16 text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-col justify-center">
+              <h2 className="font-serif text-3xl font-bold mb-2">Program Edukasi</h2>
+              <p className="text-green-100 text-sm">Aktivitas belajar, Langkah Kaderisasi, dan Regenerasi</p>
             </div>
-            <div className="flex flex-col items-center">
-              <BookOpen size={32} className="text-green-700 mb-2" />
-              <span className="font-serif font-bold">Ilmu</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <Users size={32} className="text-green-700 mb-2" />
-              <span className="font-serif font-bold">Komunitas</span>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* ===================== PROGRAMS GRID ===================== */}
-      <motion.section variants={sectionVariants} className="py-20 lg:py-32 bg-cream-100">
-        <div className="container mx-auto max-w-7xl px-4">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-stone-800">
-              Program Unggulan
-            </h2>
-            <p className="font-sans text-gray-600 max-w-2xl mx-auto">
-              Pilih program yang sesuai dengan kebutuhan kelompok atau institusi Anda.
-            </p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3">
             {educationPrograms.map((program) => (
-              <motion.div 
-                key={program.id} 
-                variants={sectionVariants}
-                className="bg-white shadow-lg overflow-hidden group hover:-translate-y-2 transition-transform duration-300"
-              >
-                {/* Gambar Program (Besar & Siku sesuai tema) */}
-                <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={program.image} 
-                    alt={program.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute top-4 left-4 bg-green-700 text-white p-2"> {/* Ikon kotak siku */}
+              <div key={program.id} className="bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors">
+                <div className="bg-white text-green-800 p-3 rounded-full w-fit mb-4">
                     <program.icon size={24} />
-                  </div>
                 </div>
-
-                {/* Konten Text */}
-                <div className="p-8">
-                  <h3 className="font-serif text-2xl font-bold mb-3 text-stone-800">
-                    {program.title}
-                  </h3>
-                  <p className="font-sans text-gray-600 mb-6 leading-relaxed">
-                    {program.description}
-                  </p>
-                  <Link 
-                    to="/about" // Atau link ke form pendaftaran jika ada
-                    className="inline-flex items-center text-strawberry-dark font-bold hover:text-strawberry-light transition-colors"
-                  >
-                    Pelajari Detail <ArrowRight size={18} className="ml-2" />
-                  </Link>
-                </div>
-              </motion.div>
+                <h3 className="font-bold text-xl mb-2">{program.title}</h3>
+                <p className="text-sm text-green-100 leading-relaxed">
+                  {program.description}
+                </p>
+              </div>
             ))}
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* ===================== CTA SECTION ===================== */}
-      <motion.section 
-        variants={sectionVariants}
-        className="py-24 bg-green-900 text-white text-center"
-      >
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="font-serif text-3xl md:text-5xl font-bold mb-6">
-            Ingin Mengadakan Kunjungan?
-          </h2>
-          <p className="font-sans text-lg text-gray-200 mb-8">
-            Hubungi tim kami untuk menyusun jadwal dan materi yang sesuai dengan kurikulum atau kebutuhan komunitas Anda.
-          </p>
-          <a
-            href="https://wa.me/6281234567890" // Ganti nomor WA
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-white text-green-900 font-bold py-4 px-10 text-lg hover:bg-gray-100 transition-colors shadow-xl" // Tombol siku
-          >
-            Hubungi Kami Sekarang
-          </a>
+      {/* ===================== NEW SECTION: INSIGHTS & ARTICLES (MIRIP GAMBAR) ===================== */}
+      <section className="py-24 container mx-auto px-4 max-w-7xl">
+         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+            
+            {/* COLUMN LEFT: Big Image + Big Text (Mirip bagian kiri gambar referensi) */}
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col h-full"
+            >
+                {/* Gambar Besar */}
+                <div className="rounded-[2rem] overflow-hidden shadow-xl mb-8 h-80 lg:h-96">
+                   <img src="/image/Edukasi_4.png" alt="Reading Class" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                </div>
+                
+                {/* Konten Teks */}
+                <div className="flex-1 flex flex-col justify-center">
+                    <h2 className="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4 leading-tight">
+                        Mahasiswa Binaan Sukses Beninovasi
+                    </h2>
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                        Mahasiswa binaan kami berhasil mengembangkan produk inovatif melalui proses mentoring intensif, riset lapangan, dan pendampingan bisnis berbasis pengalaman nyata.
+                    </p>
+                </div>
+            </motion.div>
+
+            {/* COLUMN RIGHT: Stacked Cards (Mirip bagian kanan gambar referensi) */}
+            <div className="flex flex-col gap-10">
+                {articles.map((article, index) => (
+                    <motion.div 
+                        key={article.id}
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: index * 0.2 }}
+                        className="flex flex-col sm:flex-row gap-6 items-start"
+                    >
+                        {/* Gambar Kecil */}
+                        <div className="w-full sm:w-1/2 h-56 rounded-[1.5rem] overflow-hidden shadow-md flex-shrink-0">
+                             <img src={article.image} alt={article.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                        </div>
+
+                        {/* Teks Artikel */}
+                        <div className="flex flex-col justify-center py-2">
+                             <h3 className="font-serif text-2xl font-bold text-stone-900 mb-3 leading-tight">
+                                {article.title}
+                             </h3>
+                             <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                                {article.desc}
+                             </p>
+
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+
+         </div>
+      </section>
+
+      {/* ===================== 3-COLUMN "HOW WE HELP" SECTION (DARI REQUEST SEBELUMNYA) ===================== */}
+      <section className="py-24 container mx-auto px-4 max-w-7xl bg-stone-50/50 rounded-[3rem]">
+        <div className="grid lg:grid-cols-3 gap-6 h-auto lg:h-[600px]">
+            
+            {/* COLUMN 1: Image Left */}
+            <motion.div 
+               initial={{ opacity: 0, x: -30 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.8 }}
+               className="rounded-[2.5rem] overflow-hidden shadow-2xl h-64 lg:h-full relative group"
+            >
+                <img src="/image/hero.jpg" alt="Activity" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+            </motion.div>
+
+            {/* COLUMN 2: Center Content Card (The Focus) */}
+            <motion.div 
+               initial={{ opacity: 0, y: 30 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 0.2 }}
+               className="bg-[#D9F99D] rounded-[2.5rem] p-8 lg:p-10 flex flex-col justify-between relative overflow-hidden shadow-2xl ring-1 ring-green-400/20"
+            >
+                {/* Decorative Pattern Top Right */}
+                <div className="absolute -top-10 -right-10 w-40 h-40 border-[30px] border-[#C5E86C] rounded-full opacity-50"></div>
+                <div className="absolute top-5 right-5 w-10 h-10 border-[5px] border-[#C5E86C] rounded-full opacity-60"></div>
+<br />
+                {/* Middle: Content */}
+                <div className="relative z-10">
+                    <h2 className="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4 leading-tight">
+                       Bagaimana Kami <br/> Membantu Anda?
+                    </h2>
+                    <p className="text-stone-700 mb-6 leading-relaxed">
+                       Ruang digital & fisik dimana pelajar mengakses pertanian modern.
+                    </p>
+                    
+                    {/* List Points Simplified */}
+                    <ul className="space-y-3 mb-8">
+                        {helpPoints.map((point, i) => (
+                            <li key={i} className="flex items-center gap-3">
+                                <div className="bg-white p-1 rounded-full text-green-700">
+                                    <CheckCircle size={16} fill="currentColor" className="text-white" />
+                                </div>
+                                <span className="font-bold text-stone-800 text-sm">{point}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Bottom: Button */}
+                <div className="relative z-10">
+                    <Link 
+                        to="/about"
+                        className="w-full bg-white text-stone-900 py-4 px-6 rounded-full font-bold flex items-center justify-between group hover:bg-stone-900 hover:text-white transition-all duration-300 shadow-lg"
+                    >
+                        <span>Hubungi Kami Sekarang</span>
+                        <div className="bg-[#D9F99D] group-hover:bg-gray-700 p-2 rounded-full transition-colors">
+                             <ArrowRight size={20} className="text-stone-900 group-hover:text-white" />
+                        </div>
+                    </Link>
+                </div>
+            </motion.div>
+
+            {/* COLUMN 3: Image Right */}
+            <motion.div 
+               initial={{ opacity: 0, x: 30 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.8, delay: 0.4 }}
+               className="rounded-[2.5rem] overflow-hidden shadow-2xl h-64 lg:h-full hidden lg:block relative group"
+            >
+                <img src="/image/Edukasi_12.png" alt="Field Trip" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+            </motion.div>
+
         </div>
-      </motion.section>
+      </section>
 
-    </motion.div>
+    </div>
   );
 }
