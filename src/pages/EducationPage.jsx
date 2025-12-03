@@ -46,8 +46,8 @@ const helpPoints = [
   "Edukasi Inklusif",
   "Mentoring Kewirausahaan",
   "Pembinaan ",
-  "Pelatihan Lapangan",]
-  ;
+  "Pelatihan Lapangan",
+];
 
 // === VARIAN ANIMASI ===
 const fadeInUp = {
@@ -65,11 +65,7 @@ export default function EducationPage() {
     <div className="bg-cream-50 min-h-screen overflow-hidden font-sans text-stone-800">
       
       {/* ===================== HERO SECTION ===================== */}
-      {/* PERBAIKAN: Hapus 'container' dan 'px-4' dari sini agar section lebar penuh */}
       <section className="relative pt-36 md:pt-44 pb-32 w-full overflow-hidden">
-        
-        {/* --- BACKGROUND FULL WIDTH --- */}
-        {/* Div ini sekarang absolut terhadap layar penuh, bukan container */}
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
             <div 
                 className="absolute inset-0 bg-cover bg-center"
@@ -78,11 +74,9 @@ export default function EducationPage() {
                     opacity: 0.15 
                 }} 
             ></div>
-            {/* Gradient Fade agar menyatu dengan background bawah */}
             <div className="absolute inset-0 bg-gradient-to-b from-cream-50/20 via-cream-50/60 to-cream-50"></div>
         </div>
 
-        {/* Dekorasi Squiggle */}
         <div className="absolute top-20 right-10 md:right-32 hidden md:block z-10 pointer-events-none">
            <svg width="60" height="60" viewBox="0 0 100 100" fill="none" stroke="#EAB308" strokeWidth="5">
               <path d="M10 50 Q 25 25 50 50 T 90 50" />
@@ -94,10 +88,7 @@ export default function EducationPage() {
            </svg>
         </div>
 
-        {/* === KONTEN WRAPPER === */}
-        {/* Content kita masukkan ke dalam container di sini agar tetap di tengah */}
         <div className="container mx-auto px-4 relative z-10 text-center">
-            
             <motion.div 
               initial="hidden"
               whileInView="show"
@@ -115,7 +106,6 @@ export default function EducationPage() {
               </motion.p>
             </motion.div>
 
-            {/* IMAGE GRID */}
             <motion.div 
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -135,7 +125,6 @@ export default function EducationPage() {
                     <img src="/image/Edukasi_8.JPG" alt="Art Activity" className="rounded-xl w-full h-52 md:h-60 object-cover" />
                 </div>
             </motion.div>
-
         </div>
       </section>
 
@@ -162,11 +151,9 @@ export default function EducationPage() {
         </div>
       </section>
 
-      {/* ===================== NEW SECTION: INSIGHTS & ARTICLES ===================== */}
+      {/* ===================== INSIGHTS & ARTICLES ===================== */}
       <section className="py-24 container mx-auto px-4 max-w-7xl">
          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-            
-            {/* COLUMN LEFT */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -176,7 +163,6 @@ export default function EducationPage() {
                 <div className="rounded-[2rem] overflow-hidden shadow-xl mb-8 h-80 lg:h-96">
                    <img src="/image/Edukasi_4.png" alt="Reading Class" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                 </div>
-                
                 <div className="flex-1 flex flex-col justify-center">
                     <h2 className="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4 leading-tight">
                         Mahasiswa Binaan Sukses Beninovasi
@@ -187,7 +173,6 @@ export default function EducationPage() {
                 </div>
             </motion.div>
 
-            {/* COLUMN RIGHT */}
             <div className="flex flex-col gap-10">
                 {articles.map((article, index) => (
                     <motion.div 
@@ -211,78 +196,96 @@ export default function EducationPage() {
                     </motion.div>
                 ))}
             </div>
-
          </div>
       </section>
 
-      {/* ===================== 3-COLUMN "HOW WE HELP" SECTION ===================== */}
-      <section className="py-24 container mx-auto px-4 max-w-7xl bg-stone-50/50 rounded-[3rem]">
-        <div className="grid lg:grid-cols-3 gap-6 h-auto lg:h-[600px]">
-            
-            {/* COLUMN 1 */}
-            <motion.div 
-               initial={{ opacity: 0, x: -30 }}
-               whileInView={{ opacity: 1, x: 0 }}
-               transition={{ duration: 0.8 }}
-               className="rounded-[2.5rem] overflow-hidden shadow-2xl h-64 lg:h-full relative group"
-            >
-                <img src="/image/hero.jpg" alt="Activity" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-            </motion.div>
+      {/* ===================== 3-COLUMN "HOW WE HELP" (SEAMLESS BLUR) ===================== */}
+      {/* 1. Hapus 'container' & 'max-w-7xl' dari <section> agar background full-width.
+          2. Hapus 'bg-stone-50/50' agar warna dasar transparan (mewarisi bg-cream-50).
+          3. Tambahkan div 'Gradient Mask' di paling atas untuk menyatukan transisi.
+      */}
+      <section className="relative py-24 w-full overflow-hidden">
+        
+        {/* --- GRADIENT MASK (KUNCI AGAR MENYATU) --- */}
+        {/* Gradasi dari Cream Solid ke Transparan di bagian atas, membuat efek "timbul" */}
+        <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-cream-50 to-transparent z-10 pointer-events-none"></div>
 
-            {/* COLUMN 2 */}
-            <motion.div 
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.8, delay: 0.2 }}
-               className="bg-[#D9F99D] rounded-[2.5rem] p-8 lg:p-10 flex flex-col justify-between relative overflow-hidden shadow-2xl ring-1 ring-green-400/20"
-            >
-                <div className="absolute -top-10 -right-10 w-40 h-40 border-[30px] border-[#C5E86C] rounded-full opacity-50"></div>
-                <div className="absolute top-5 right-5 w-10 h-10 border-[5px] border-[#C5E86C] rounded-full opacity-60"></div>
+        {/* --- BACKGROUND BLUR ELEMENTS (FULL WIDTH) --- */}
+        <div className="absolute top-0 -left-[20%] w-[800px] h-[800px] bg-red-200/30 rounded-full blur-[120px] pointer-events-none mix-blend-multiply z-0"></div>
+        <div className="absolute bottom-0 -right-[20%] w-[800px] h-[800px] bg-green-200/30 rounded-full blur-[120px] pointer-events-none mix-blend-multiply z-0"></div>
+        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-[900px] h-[900px] bg-yellow-100/40 rounded-full blur-[150px] pointer-events-none z-0"></div>
+        {/* -------------------------------------------------- */}
 
-                <div className="relative z-10 pt-10">
-                    <h2 className="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4 leading-tight">
-                       Bagaimana Kami <br/> Membantu Anda?
-                    </h2>
-                    <p className="text-stone-700 mb-6 leading-relaxed">
-                       Ruang digital & fisik dimana khalayak umum bisa mengakses pertanian.
-                    </p>
-                    <ul className="space-y-3 mb-8">
-                        {helpPoints.map((point, i) => (
-                            <li key={i} className="flex items-center gap-3">
-                                <div className="bg-white p-1 rounded-full text-green-700">
-                                    <CheckCircle size={16} fill="currentColor" className="text-white" />
-                                </div>
-                                <span className="font-bold text-stone-800 text-sm">{point}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+        {/* --- CONTAINER KONTEN (Agar Kartu Tetap di Tengah) --- */}
+        <div className="container mx-auto px-4 max-w-7xl relative z-20">
+            <div className="grid lg:grid-cols-3 gap-6 h-auto lg:h-[600px]">
+                
+                {/* COLUMN 1 */}
+                <motion.div 
+                   initial={{ opacity: 0, x: -30 }}
+                   whileInView={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.8 }}
+                   className="rounded-[2.5rem] overflow-hidden shadow-2xl h-64 lg:h-full relative group"
+                >
+                    <img src="/image/hero.jpg" alt="Activity" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                </motion.div>
 
-                <div className="relative z-10">
-                    <Link 
-                        to="/about"
-                        className="w-full bg-white text-stone-900 py-4 px-6 rounded-full font-bold flex items-center justify-between group hover:bg-stone-900 hover:text-white transition-all duration-300 shadow-lg"
-                    >
-                        <span>Hubungi Kami Sekarang</span>
-                        <div className="bg-[#D9F99D] group-hover:bg-gray-700 p-2 rounded-full transition-colors">
-                             <ArrowRight size={20} className="text-stone-900 group-hover:text-white" />
-                        </div>
-                    </Link>
-                </div>
-            </motion.div>
+                {/* COLUMN 2 (Center Card) */}
+                <motion.div 
+                   initial={{ opacity: 0, y: 30 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   transition={{ duration: 0.8, delay: 0.2 }}
+                   // Gunakan backdrop-blur agar terlihat seperti kaca di atas blur background
+                   className="bg-[#D9F99D]/90 backdrop-blur-md rounded-[2.5rem] p-8 lg:p-10 flex flex-col justify-between relative overflow-hidden shadow-2xl ring-1 ring-green-400/20"
+                >
+                    <div className="absolute -top-10 -right-10 w-40 h-40 border-[30px] border-[#C5E86C] rounded-full opacity-50"></div>
+                    <div className="absolute top-5 right-5 w-10 h-10 border-[5px] border-[#C5E86C] rounded-full opacity-60"></div>
 
-            {/* COLUMN 3 */}
-            <motion.div 
-               initial={{ opacity: 0, x: 30 }}
-               whileInView={{ opacity: 1, x: 0 }}
-               transition={{ duration: 0.8, delay: 0.4 }}
-               className="rounded-[2.5rem] overflow-hidden shadow-2xl h-64 lg:h-full hidden lg:block relative group"
-            >
-                <img src="/image/Edukasi_12.png" alt="Field Trip" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-            </motion.div>
+                    <div className="relative z-10 pt-10">
+                        <h2 className="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4 leading-tight">
+                           Bagaimana Kami <br/> Membantu Anda?
+                        </h2>
+                        <p className="text-stone-700 mb-6 leading-relaxed">
+                           Ruang digital & fisik dimana khalayak umum bisa mengakses pertanian.
+                        </p>
+                        <ul className="space-y-3 mb-8">
+                            {helpPoints.map((point, i) => (
+                                <li key={i} className="flex items-center gap-3">
+                                    <div className="bg-white p-1 rounded-full text-green-700">
+                                        <CheckCircle size={16} fill="currentColor" className="text-white" />
+                                    </div>
+                                    <span className="font-bold text-stone-800 text-sm">{point}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
+                    <div className="relative z-10">
+                        <Link 
+                            to="/about"
+                            className="w-full bg-white text-stone-900 py-4 px-6 rounded-full font-bold flex items-center justify-between group hover:bg-stone-900 hover:text-white transition-all duration-300 shadow-lg"
+                        >
+                            <span>Hubungi Kami Sekarang</span>
+                            <div className="bg-[#D9F99D] group-hover:bg-gray-700 p-2 rounded-full transition-colors">
+                                 <ArrowRight size={20} className="text-stone-900 group-hover:text-white" />
+                            </div>
+                        </Link>
+                    </div>
+                </motion.div>
+
+                {/* COLUMN 3 */}
+                <motion.div 
+                   initial={{ opacity: 0, x: 30 }}
+                   whileInView={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.8, delay: 0.4 }}
+                   className="rounded-[2.5rem] overflow-hidden shadow-2xl h-64 lg:h-full hidden lg:block relative group"
+                >
+                    <img src="/image/Edukasi_12.png" alt="Field Trip" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                </motion.div>
+
+            </div>
         </div>
       </section>
 
