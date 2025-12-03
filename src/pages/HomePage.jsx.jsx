@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { products } from '../data/products.js';
-import ProductCard from '../components/ProductCard.jsx';
-import ProductModal from '../components/ProductModal.jsx';
 
 import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  Quote
-} from 'lucide-react'; // Ikon fitur (Leaf, Sprout, Award) sudah tidak dipakai
+  Play, 
+  ArrowDownCircle, 
+  ArrowUpCircle,
+  TrendingUp, // Ikon untuk Stats
+  Users,      // Ikon untuk Stats
+  Package,    // Ikon untuk Stats
+  Sprout      // Ikon untuk Stats
+} from 'lucide-react';
 
 // === DATA SLIDES HERO SECTION ===
 const slides = [
@@ -34,34 +37,62 @@ const slides = [
   },
 ];
 
-// === DATA FITUR KEUNGGULAN (Path gambar ikon) ===
+// === DATA FITUR KEUNGGULAN ===
 const features = [
   {
-    image: '/image/why1.jpg', // Sesuaikan nama file jika perlu
+    image: '/image/why1.jpg',
     title: '100% Alami & Organik',
     description:
       'Stroberi kami tumbuh subur secara alami, bebas dari pestisida dan bahan kimia berbahaya.',
   },
   {
-    image: '/image/why.png', // Sesuaikan nama file jika perlu
+    image: '/image/why.png',
     title: 'Panen Segar Setiap Hari',
     description:
       'Kami memastikan hanya buah stroberi segar yang baru dipetik yang sampai ke tangan Anda.',
   },
   {
-    image: '/image/why2.jpg', // Sesuaikan nama file jika perlu
+    image: '/image/why2.jpg',
     title: 'Kualitas Premium Terjamin',
     description:
       'Dari bibit unggul hingga pengemasan, kami menjaga standar kualitas tertinggi di setiap langkah.',
   },
 ];
 
-// === DATA FAKTA / STATS ===
+// === DATA FAKTA / STATS (Dengan Icon Kembali) ===
 const stats = [
-  { value: '10+', label: 'Tahun Pengalaman', color: 'text-strawberry-dark' }, // Diubah ke strawberry-dark
-  { value: '5+', label: 'Hektar Kebun', color: 'text-strawberry-dark' },    // Diubah ke strawberry-dark
-  { value: '15+', label: 'Varian Produk', color: 'text-strawberry-dark' },   // Diubah ke strawberry-dark
-  { value: '1000+', label: 'Pelanggan Setia', color: 'text-strawberry-dark' }, // Diubah ke strawberry-dark
+  { 
+    value: '133%', 
+    label: 'Peningkatan Nilai Ekonomi', 
+    desc: 'Dibandingkan jalur tengkulak',
+    icon: TrendingUp,
+    color: 'text-green-400',
+    bg: 'bg-green-900/50'
+  }, 
+  { 
+    value: '500+', 
+    label: 'Pemuda Terinspirasi', 
+    desc: 'Melalui edukasi & magang',
+    icon: Users,
+    color: 'text-yellow-400',
+    bg: 'bg-yellow-900/50'
+  }, 
+  { 
+    value: '23+', 
+    label: 'Mitra Petani Lokal', 
+    desc: 'Pemberdayaan masyarakat',
+    icon: Sprout,
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-900/50'
+  }, 
+  { 
+    value: '10+', 
+    label: 'Produk Inovatif', 
+    desc: 'Hilirisasi olahan stroberi',
+    icon: Package,
+    color: 'text-rose-400',
+    bg: 'bg-rose-900/50'
+  }, 
 ];
 
 // === DATA TESTIMONI ===
@@ -89,6 +120,40 @@ const testimonials = [
   },
 ];
 
+// === DATA VIDEO YOUTUBE ===
+const youtubeVideos = [
+  {
+    id: 'K4TOrB7at0Y', 
+    title: 'Proses Panen di Bedugul',
+    description: 'Melihat langsung bagaimana petani kami memetik stroberi terbaik.'
+  },
+  {
+    id: '3XviR7esUvo', 
+    title: 'Rahasia Dapur Strawberry Corps',
+    description: 'Cara kami mengolah buah segar menjadi selai premium.'
+  },
+  {
+    id: 'lTRiuFIWV54', 
+    title: 'Tour Kebun & Edukasi',
+    description: 'Wisata edukasi bagi Anda yang ingin belajar menanam stroberi.'
+  },
+  // --- Video Tambahan ---
+  {
+    id: 'ScMzIvxBSi4',
+    title: 'Inovasi Produk Olahan',
+    description: 'Mengubah hasil panen melimpah menjadi produk bernilai tinggi.'
+  },
+  {
+    id: 'ysz5S6P_c8',
+    title: 'Pemberdayaan Masyarakat',
+    description: 'Bagaimana kami merangkul petani lokal untuk tumbuh bersama.'
+  },
+  {
+    id: 'jNQXAC9IVRw', 
+    title: 'Jejak Langkah Kami',
+    description: 'Perjalanan Strawberry Corps dari awal hingga saat ini.'
+  },
+];
 
 // Varian animasi
 const sectionVariants = {
@@ -110,9 +175,7 @@ const containerVariants = {
 // ==========================================
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const bestSellers = products.slice(0, 3);
+  const [showAllVideos, setShowAllVideos] = useState(false);
 
   const nextSlide = () =>
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
@@ -124,6 +187,8 @@ const HomePage = () => {
     const slideInterval = setInterval(nextSlide, 5000);
     return () => clearInterval(slideInterval);
   }, []);
+
+  const displayedVideos = showAllVideos ? youtubeVideos : youtubeVideos.slice(0, 3);
 
   return (
     <>
@@ -207,7 +272,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* ===================== FEATURES (Dengan Gambar Besar) ===================== */}
+        {/* ===================== FEATURES ===================== */}
         <motion.section
           variants={sectionVariants}
           className="relative py-20 lg:py-32 bg-cream-100"
@@ -227,22 +292,19 @@ const HomePage = () => {
               kejujuran, kesegaran, dan kualitas tanpa kompromi.
             </motion.p>
 
-       <motion.div
+            <motion.div
               variants={containerVariants}
               className="grid gap-8 md:grid-cols-3"
             >
               {features.map((feature, index) => (
                 <motion.div key={index} variants={sectionVariants}>
-                  {/* === KARTU FITUR (Diperbarui) === */}
-                  <div className="bg-white shadow-lg h-full overflow-hidden transition-transform transform hover:-translate-y-2 flex flex-col"> {/* <-- rounded-2xl DIHAPUS */}
-                    {/* 1. Gambar Besar di Atas */}
+                  <div className="bg-white shadow-lg h-full overflow-hidden transition-transform transform hover:-translate-y-2 flex flex-col">
                     <img
                       src={feature.image}
                       alt={feature.title}
-                      className="w-full h-[36rem] object-cover" 
+                      className="w-full h-[36rem] object-cover"
                       loading="lazy"
                     />
-                    {/* 2. Teks di Bawah */}
                     <div className="p-6 flex flex-col flex-grow">
                       <h3 className="font-serif text-xl font-bold mb-2 text-stone-900">
                         {feature.title}
@@ -252,31 +314,55 @@ const HomePage = () => {
                       </p>
                     </div>
                   </div>
-                  {/* =============================== */}
                 </motion.div>
               ))}
             </motion.div>
           </div>
         </motion.section>
 
- {/* ===================== SECTION: COMPANY STATS ===================== */}
+        {/* ===================== SECTION: COMPANY STATS (HIJAU + CARD + LOGO) ===================== */}
         <motion.section
           variants={sectionVariants}
-          className="bg-green-900 py-16 text-white" // Warna hijau digelapkan sedikit
+          className="relative py-20 text-white overflow-hidden bg-green-900" // Background Hijau Solid
         >
-          <div className="max-w-screen-xl mx-auto px-4">
+          {/* Ornamen Background Abstrak Halus */}
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/path-to-subtle-pattern.png')] opacity-10"></div>
+
+          <div className="relative max-w-screen-xl mx-auto px-4 z-10">
             <motion.div
               variants={containerVariants}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
             >
               {stats.map((stat, index) => (
-                <motion.div key={index} variants={sectionVariants}>
-                  <p className="font-serif text-5xl md:text-6xl font-extrabold mb-2">
-                    {stat.value}
-                  </p>
-                  <p className={`font-sans text-lg md:text-xl font-semibold ${stat.color}`}>
-                    {stat.label}
-                  </p>
+                <motion.div 
+                  key={index} 
+                  variants={sectionVariants}
+                  whileHover={{ y: -10 }}
+                  className="relative group"
+                >
+                  {/* Card Design (Glassmorphism Effect di atas Hijau) */}
+                  <div className="h-full bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:shadow-xl">
+                    
+                    {/* Icon Circle (Logo) */}
+                    <div className={`mb-6 p-4 rounded-full ${stat.bg} ${stat.color} shadow-lg ring-1 ring-white/20 group-hover:scale-110 transition-transform duration-300`}>
+                      <stat.icon size={32} strokeWidth={2} />
+                    </div>
+
+                    {/* Angka Besar */}
+                    <p className="font-serif text-5xl md:text-5xl font-extrabold mb-2 text-white drop-shadow-sm">
+                      {stat.value}
+                    </p>
+                    
+                    {/* Label */}
+                    <p className="font-sans text-lg font-bold text-green-100 mb-2 tracking-wide uppercase">
+                      {stat.label}
+                    </p>
+                    
+                    {/* Deskripsi Kecil */}
+                    <p className="font-sans text-sm text-gray-300 group-hover:text-white transition-colors">
+                      {stat.desc}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
@@ -362,50 +448,91 @@ const HomePage = () => {
           </div>
         </motion.section>
 
-        {/* ===================== BAGIAN PRODUK ===================== */}
+        {/* ===================== BAGIAN VIDEO YOUTUBE ===================== */}
         <motion.section
           variants={sectionVariants}
-          className="relative py-20 lg:py-32 bg-cream-50"
+          className="relative py-20 lg:py-32 text-white"
+          style={{
+            backgroundImage: "linear-gradient(to bottom, rgba(153, 27, 27, 0.9), rgba(69, 10, 10, 0.95)), url('/image/background-merah.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+          }}
         >
           <div className="max-w-screen-xl px-4 mx-auto">
             <motion.h2
               variants={sectionVariants}
-              className="font-serif text-3xl md:text-4xl font-bold mb-12 text-center text-stone-800"
+              className="font-serif text-3xl md:text-4xl font-bold mb-4 text-center text-white drop-shadow-md"
             >
-              Produk Pilihan Kami
+              Galeri Video & Edukasi
             </motion.h2>
+            <motion.p
+              variants={sectionVariants}
+              className="font-sans max-w-2xl mx-auto text-gray-200 mb-12 text-center"
+            >
+              Saksikan cerita di balik layar Strawberry Corps, dari proses pembibitan hingga panen di kebun kami yang asri.
+            </motion.p>
 
             <motion.div
               variants={containerVariants}
               className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
             >
-              {bestSellers.map((product) => (
-                <motion.div key={product.id} variants={sectionVariants}>
-                  <ProductCard
-                    product={product}
-                    onDetailClick={() => setSelectedProduct(product)}
-                  />
+              {displayedVideos.map((video) => (
+                <motion.div key={video.id} variants={sectionVariants}>
+                  <div className="flex flex-col h-full group">
+                    
+                    {/* CONTAINER VIDEO (KOTAK & BESAR) */}
+                    <div className="aspect-square w-full bg-black/50 shadow-2xl rounded-xl overflow-hidden border border-white/20 transition-all duration-300 group-hover:border-white/50 group-hover:shadow-white/10">
+                      <iframe
+                        className="w-full h-full"
+                        src={`https://www.youtube.com/embed/${video.id}`}
+                        title={video.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                      ></iframe>
+                    </div>
+
+                    {/* CAPTION (JUDUL & DESKRIPSI) DI BAWAH VIDEO */}
+                    <div className="pt-5 px-1">
+                      <h3 className="font-serif text-xl font-bold text-white mb-2 line-clamp-2 leading-tight group-hover:text-yellow-200 transition-colors">
+                        {video.title}
+                      </h3>
+                      <p className="font-sans text-sm text-gray-200 line-clamp-3 leading-relaxed opacity-90">
+                        {video.description}
+                      </p>
+                    </div>
+
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
 
-            <motion.div variants={sectionVariants} className="mt-16 text-center">
-              <Link
-                to="/products"
-                className="group inline-flex items-center gap-2 text-lg font-semibold text-green-700 transition-colors hover:text-strawberry-dark"
-              >
-                Lihat Semua Koleksi
-                <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" size={20} />
-              </Link>
-            </motion.div>
+            {/* Tombol Tampilkan/Sembunyikan Video */}
+            {youtubeVideos.length > 3 && (
+              <motion.div variants={sectionVariants} className="mt-16 text-center">
+                <button
+                  onClick={() => setShowAllVideos(!showAllVideos)}
+                  className="group inline-flex items-center gap-2 text-lg font-bold text-white transition-all hover:text-yellow-200 bg-white/20 hover:bg-white/30 px-8 py-3 rounded-full backdrop-blur-sm shadow-lg border border-white/30"
+                >
+                  {showAllVideos ? (
+                    <>
+                      Sembunyikan Video
+                      <ArrowUpCircle className="transition-transform duration-300 group-hover:-translate-y-1" size={24} />
+                    </>
+                  ) : (
+                    <>
+                      Tampilkan Video Lainnya
+                      <ArrowDownCircle className="transition-transform duration-300 group-hover:translate-y-1" size={24} />
+                    </>
+                  )}
+                </button>
+              </motion.div>
+            )}
           </div>
         </motion.section>
       </motion.div>
-
-      <ProductModal
-        product={selectedProduct}
-        onClose={() => setSelectedProduct(null)}
-      />
     </>
   );
 };

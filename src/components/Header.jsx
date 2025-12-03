@@ -3,7 +3,6 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
-// === MENU LENGKAP (5 PILAR) ===
 const navLinks = [
   { href: '/', label: 'Agro Tourism' }, 
   { href: '/education', label: 'Educational Activities' },
@@ -12,7 +11,6 @@ const navLinks = [
   { href: '/community', label: 'Community Development' },
   { href: '/about', label: 'About' },
 ];
-// ==============================
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,9 +19,10 @@ export default function Header() {
 
   const location = useLocation();
   
-  // 1. Deteksi halaman
+  // 1. Deteksi halaman (UPDATE DISINI)
   const isHomePage = location.pathname === '/';
-  const isWastePage = location.pathname === '/waste'; // Menambahkan deteksi halaman Waste
+  const isWastePage = location.pathname === '/waste';
+  const isCommunityPage = location.pathname === '/community'; // <-- Tambahkan ini
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const previous = scrollY.getPrevious();
@@ -41,12 +40,12 @@ export default function Header() {
     });
   }, [scrollY]);
 
-  // 2. Logika Warna Header (PENTING)
-  // Header dianggap "Solid" (Putih) jika:
-  // - Sudah di-scroll (isScrolled true)
-  // - ATAU: Sedang BUKAN di Homepage DAN BUKAN di Wastepage
-  // (Artinya: Di Home dan Wastepage, header akan Transparan saat di paling atas)
-  const isSolid = isScrolled || (!isHomePage && !isWastePage);
+  // 2. Logika Warna Header (UPDATE DISINI)
+  // Header Transparan jika di: Home, Waste, ATAU Community
+  const isTransparentPage = isHomePage || isWastePage || isCommunityPage;
+  
+  // Header jadi solid jika di-scroll ATAU jika kita TIDAK di halaman transparan
+  const isSolid = isScrolled || !isTransparentPage;
 
   return (
     <>
@@ -65,6 +64,7 @@ export default function Header() {
           
           {/* Logo & Teks Brand */}
           <Link to="/" className="flex items-center gap-3" aria-label="Beranda Strawberry Corps">
+            {/* Opsi: Gunakan logo putih saat transparan, dan logo warna saat solid jika punya 2 versi */}
             <img 
               src="/image/logo.png" 
               alt="Strawberry Corps Logo" 
@@ -93,7 +93,7 @@ export default function Header() {
                     isActive
                       // Jika aktif: Merah Gelap saat solid, atau tetap Putih/Merah terang saat transparan
                       ? (isSolid ? 'text-strawberry-dark font-bold' : 'font-bold underline decoration-2 underline-offset-4')
-                      : 'hover:text-strawberry'
+                      : 'hover:text-red-200' // Ubah hover saat mode transparan agar lebih terlihat
                   }`
                 }
               >
@@ -115,7 +115,7 @@ export default function Header() {
         </nav>
       </motion.header>
 
-      {/* Drawer Menu Mobile */}
+      {/* Drawer Menu Mobile (TIDAK PERLU DIUBAH) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
