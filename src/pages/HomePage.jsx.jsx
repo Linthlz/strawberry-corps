@@ -123,34 +123,34 @@ const testimonials = [
 // === DATA VIDEO YOUTUBE ===
 const youtubeVideos = [
   {
-    id: 'K4TOrB7at0Y', 
-    title: 'Proses Panen di Bedugul',
-    description: 'Melihat langsung bagaimana petani kami memetik stroberi terbaik.'
+    id: 'eNEgk7Vkhj4', 
+    title: 'PETIK CUAN BUDIDAYA STROBERI ',
+    description: 'KISAH SUKSES DIBALIK AGROWISATA HIDDEN STRAWBERRY GARDEN'
   },
   {
-    id: '3XviR7esUvo', 
-    title: 'Rahasia Dapur Strawberry Corps',
-    description: 'Cara kami mengolah buah segar menjadi selai premium.'
+    id: 'wm6OvTxqY9c', 
+    title: 'Hidden Strawberry Garden',
+    description: 'Bisa Petik Langsung Di Kebun Strawberry Bedugul.'
   },
   {
-    id: 'lTRiuFIWV54', 
-    title: 'Tour Kebun & Edukasi',
-    description: 'Wisata edukasi bagi Anda yang ingin belajar menanam stroberi.'
+    id: 'xv6DN8BwJ00', 
+    title: 'Bertani Itu Keren',
+    description: 'Hidden Strawberry Garden, Mimpi Tak Tersembunyi.'
   },
   // --- Video Tambahan ---
   {
-    id: 'ScMzIvxBSi4',
-    title: 'Inovasi Produk Olahan',
+    id: 'a3HCbSQDp3Y',
+    title: 'Hidden Strawberry Garden Tour',
     description: 'Mengubah hasil panen melimpah menjadi produk bernilai tinggi.'
   },
   {
-    id: 'ysz5S6P_c8',
-    title: 'Pemberdayaan Masyarakat',
-    description: 'Bagaimana kami merangkul petani lokal untuk tumbuh bersama.'
+    id: 'G6w38u-OFEM',
+    title: 'Wisata petik langsung Strawberry di Bedugul Bali',
+    description: 'Hidden Strawberry, Berkebun di Bedugul.'
   },
   {
-    id: 'jNQXAC9IVRw', 
-    title: 'Jejak Langkah Kami',
+    id: '3qS6Y4D0jOo', 
+    title: 'Inovasi Hidden Strawberry Garden di Bedugul, Bali',
     description: 'Perjalanan Strawberry Corps dari awal hingga saat ini.'
   },
 ];

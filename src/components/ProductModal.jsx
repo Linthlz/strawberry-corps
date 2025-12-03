@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { X, ShoppingBag } from 'lucide-react';
 import { makeWhatsAppLink } from '../utils/whatsappHelper.js';
 
-const WA_NUMBER = '6281234567890'; // Ganti nomormu
+const WA_NUMBER = '6285237601943'; // Ganti nomormu
 
 // Varian animasi sederhana
 const backdropVariants = {

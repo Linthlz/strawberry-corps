@@ -11,8 +11,10 @@ const pageVariants = {
 };
 const pageTransition = { duration: 0.5 };
 
-const WA_NUMBER = '6281234567890'; 
-const GMAPS_LINK = 'http://googleusercontent.com/maps/google.com/1'; 
+// --- UPDATE DATA KONTAK DISINI ---
+const WA_NUMBER = '6285237601943'; 
+// Menggunakan link search query agar akurat ke lokasi Hidden Strawberry Garden
+const GMAPS_LINK = 'https://www.google.com/maps/search/?api=1&query=Hidden+Strawberry+Garden+Bedugul'; 
 
 // === DATA BARU UNTUK HIGHLIGHT ===
 const highlights = [
@@ -143,7 +145,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ===================== NEW SECTION (UI SESUAI REQUEST: CENTERED) ===================== */}
+      {/* ===================== HIGHLIGHTS SECTION ===================== */}
       <section className="container mx-auto max-w-6xl px-4 py-20">
          <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
             {highlights.map((item, index) => (
@@ -153,13 +155,8 @@ export default function AboutPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.2 }}
-                    // PERUBAHAN: Ditambahkan 'items-center' dan 'text-center' di sini
                     className="flex flex-col h-full items-center text-center"
                 >
-                    {/* PERUBAHAN GAMBAR: 
-                       1. 'items-start' diubah menjadi 'items-center justify-center'
-                       2. 'object-left' diubah menjadi 'object-center'
-                    */}
                     <div className="h-56 w-full mb-6 flex items-center justify-center">
                         <img 
                             src={item.image} 
@@ -168,8 +165,6 @@ export default function AboutPage() {
                         />
                     </div>
 
-                    {/* Konten Text - Tanpa Card Putih & Center */}
-                    {/* PERUBAHAN: Ditambahkan 'items-center' agar tombol di bawah ikut tengah */}
                     <div className="flex flex-col flex-grow items-center">
                         <h3 className="font-serif text-3xl font-bold text-stone-900 mb-4 leading-tight">
                             {item.title}
@@ -182,7 +177,6 @@ export default function AboutPage() {
             ))}
          </div>
       </section>
-      {/* ======================================================================== */}
 
       {/* === Section 3: Galeri === */}
       <section className="bg-white py-20 md:py-32">
@@ -247,30 +241,34 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* Kartu Kontak 1 */}
+            {/* Kartu Kontak 1: WA */}
             <a href={waLink} target="_blank" rel="noopener noreferrer" className="contact-card-link group">
-              <div className="bg-white/10 backdrop-blur-sm p-8 text-white border border-white/20 hover:bg-white/20 transition-all">
+              <div className="bg-white/10 backdrop-blur-sm p-8 text-white border border-white/20 hover:bg-white/20 transition-all h-full">
                 <Phone className="h-10 w-10 mx-auto mb-4 text-strawberry-light" />
                 <h3 className="text-2xl font-bold mb-2">Telepon & WA</h3>
-                <p>{WA_NUMBER.replace('62', '0')}</p>
+                <p>{WA_NUMBER.replace(/^62/, '0')}</p>
               </div>
             </a>
             
-            {/* Kartu Kontak 2 */}
+            {/* Kartu Kontak 2: Lokasi */}
             <a href={GMAPS_LINK} target="_blank" rel="noopener noreferrer" className="contact-card-link group">
-              <div className="bg-white/10 backdrop-blur-sm p-8 text-white border border-white/20 hover:bg-white/20 transition-all">
+              <div className="bg-white/10 backdrop-blur-sm p-8 text-white border border-white/20 hover:bg-white/20 transition-all h-full">
                 <MapPin className="h-10 w-10 mx-auto mb-4 text-strawberry-light" />
                 <h3 className="text-2xl font-bold mb-2">Lokasi</h3>
-                <p>Jl. Raya Bedugul (Lihat Peta)</p>
+                <p className="mb-2">Jl. Gatotkaca, Pancasari, Bedugul</p>
+                <span className="text-sm underline decoration-strawberry-light underline-offset-4 group-hover:text-strawberry-light transition-colors">
+                  Lihat di Peta
+                </span>
               </div>
             </a>
             
-            {/* Kartu Kontak 3 */}
+            {/* Kartu Kontak 3: Jam Buka */}
             <div className="contact-card-link">
-              <div className="bg-white/10 backdrop-blur-sm p-8 text-white border border-white/20 hover:bg-white/20 transition-all">
+              <div className="bg-white/10 backdrop-blur-sm p-8 text-white border border-white/20 hover:bg-white/20 transition-all h-full">
                 <Clock className="h-10 w-10 mx-auto mb-4 text-strawberry-light" />
                 <h3 className="text-2xl font-bold mb-2">Jam Buka</h3>
-                <p>Setiap Hari, 09:00 - 17:00 WITA</p>
+                <p>Setiap Hari</p>
+                <p>08:00 - 18:00 WITA</p>
               </div>
             </div>
           </motion.div>
