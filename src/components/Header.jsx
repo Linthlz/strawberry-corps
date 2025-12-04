@@ -4,11 +4,11 @@ import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { href: '/', label: 'Agro Tourism' }, 
-  { href: '/education', label: 'Educational Activities' },
+  { href: '/', label: 'Agro Tour' }, 
+  { href: '/education', label: 'Edu Act' },
   { href: '/products', label: 'Product' },
-  { href: '/waste', label: 'Waste Management' },
-  { href: '/community', label: 'Community Development' },
+  { href: '/waste', label: 'Eco Waste' },
+  { href: '/community', label: 'Community' },
   { href: '/about', label: 'About' },
 ];
 
