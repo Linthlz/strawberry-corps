@@ -99,24 +99,24 @@ const stats = [
 const testimonials = [
   {
     quote:
-      'Selai stroberi dari Strawberry Corps adalah yang terbaik! Rasanya seperti stroberi asli dari kebun, tidak terlalu manis, sempurna untuk sarapan.',
-    author: 'Citra Dewi',
+      'Perfect spot for families, couples, or anyone looking for a peaceful and tasty activity. Definitely coming back again! 🍓🍓🍓🍓🍓🍓',
+    author: 'Ni Made Winda Ariesta Natasari',
     role: 'Pecinta Sarapan',
-    avatar: '/image/avatar-1.jpg',
+    avatar: '/ulasan1.png',
   },
   {
     quote:
-      'Jus stroberi murni mereka sangat menyegarkan dan benar-benar menghilangkan dahaga. Saya selalu stok di kulkas!',
-    author: 'Bayu Prakoso',
+      'Pengalaman petik strawberry yg luar biasa, udah 4 kali kesini dan ga bosan, mereka juga ada beberapa produk olahan dari strawberry. Recommend bgt sih.',
+    author: 'Agus Dion',
     role: 'Penggemar Jus Sehat',
-    avatar: '/image/avatar-2.jpg',
+    avatar: '/ulasan.png',
   },
   {
     quote:
-      'Saya tidak pernah tahu stroberi kering bisa seenak ini! Camilan sehat yang lezat dan membuat ketagihan.',
-    author: 'Siti Aminah',
+      'If you’re looking for a truly hidden gem, Hidden Strawberry Garden is the perfect spot. True to its name, this place is tucked away down a small lane, and you’ll need to go a bit further in to find it.',
+    author: 'Eshter K',
     role: 'Penikmat Camilan',
-    avatar: '/image/avatar-3.jpg',
+    avatar: '/ulasan2.png',
   },
 ];
 

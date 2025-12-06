@@ -370,12 +370,7 @@ export default function WastePage() {
                   "Upaya ini terbukti meningkatkan nilai ekonomi petani hingga <strong>133%</strong> dibandingkan jika mereka hanya menjual hasil panen mentah kepada tengkulak."
                 </p>
               </div>
-              
-              <div className="pt-2">
-                <button className="text-red-900 font-bold tracking-wide uppercase border-b-2 border-red-900 pb-1 hover:text-red-600 hover:border-red-600 transition-all text-sm">
-                  Lihat Laporan Dampak Lingkungan
-                </button>
-              </div>
+
 
             </motion.div>
           </div>
